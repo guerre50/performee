@@ -99,7 +99,7 @@ function init() {
 	});
 
 	// Init multiplayer 
-    socket = io.connect("http://localhost", {port: 8000, transports: ["websocket"]});
+    socket = io.connect("http://ec2-46-51-150-16.eu-west-1.compute.amazonaws.com", {port: 9092, transports: ["websocket"]});
 	remotePlayers = [];
 };
 

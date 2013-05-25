@@ -18,7 +18,7 @@ app.get('/', function(req, res) {
     res.send('Hello World');
 });
 
-app.listen(3000);
+app.listen(9091);
 
 /**************************************************
 ** GAME VARIABLES
@@ -35,7 +35,7 @@ function init() {
 	players = [];
 
 	// Set up Socket.IO to listen on port 8000
-	socket = io.listen(8000);
+	socket = io.listen(9092);
 
 	// Configure Socket.IO
 	socket.configure(function() {
