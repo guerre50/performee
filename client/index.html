@@ -29,7 +29,8 @@
            $("#appendedInput").removeAttr("disabled").val(id);
            $("#iconOutput").removeClass().addClass("icon-play");
            $("#hallOutputdiv").addClass("animated shake");
-           $("#buttonOutput").removeClass("btn-danger").addClass("btn-success").attr("href", id).attr("target", "_blank");
+           $("#buttonOutput").removeClass("btn-danger").addClass("btn-success");
+           $("#outputHREF").attr("href", id);
         }
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				$("#liveURLtxt").addClass("animated shake");
@@ -152,7 +153,7 @@
           <div class="span5" ><h2 class="boxer_title">#3 Share it!</h2><br>
              Spread &nbsp; <div id="hallOutputdiv" class="input-append">
 			  <input class="span3" id="appendedInput" type="text" placeholder="Paste video url first" disabled>
-			  <span id="buttonOutput" class="add-on btn btn-danger"><i id="iconOutput" class="icon-stop"></i> </span>
+			  <a id="outputHREF" target="_blank"><span id="buttonOutput" class="add-on btn btn-danger"><i id="iconOutput" class="icon-stop"></i> </span></a>
 				</div> <br> to let people <strong>join in</strong>!
 			<br><br><br>
 		  </div>
