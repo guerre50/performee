@@ -1,41 +1,174 @@
-<!doctype html><title>Minimal tQuery Page</title>
-<head>
-	<script src="static/js/libs/headtrackr.js"></script>
-	<script src="static/js/libs/Tween.js"></script>
-	<script src="static/js/libs/tquery-bundle.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Hallify.us: A Bootstrap Micro Theme</title>
+    <meta name="description" content="A new bootstrap theme">
+    <meta name="author" content="Damian Sowers">
+    <!-- Le styles -->
+    <link href="static/css/bootstrap.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
+    <link href='static/css/boxer.css' rel='stylesheet' type='text/css'>
+	<link href='static/css/animate.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="static/css/elusive-webfont.css">
+    <script src="static/js/libs/jquery.min.js" type="text/javascript"></script>
+    <script src="static/js/libs/jquery.smooth-scroll.js"></script>
+    <script src="static/js/libs/boxer.js"></script>
+	<script>
+		function createHall(url) {
+			var request = $.ajax({
+				url: "http://ec2-54-229-20-181.eu-west-1.compute.amazonaws.com:9093/halls",
+				type: "post",
+				data: {url:url}
+			}).done(function(response, textStatus) {
+				console.log(response);
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+				$("#liveURLtxt").addClass("animated shake");
+				
+				window.setTimeout( function(){
+					$("#liveURLtxt").removeClass("animated")
+				}, 1000);
+			});
+		};
+	</script>
+    <!-- elusive icons ie7 support -->
+    <!--[if lte IE 7]><script src="js/lte-ie7.js"></script><![endif]-->
 
-	<script src="static/vendor/three.js/shaders/BleachBypassShader.js"></script>
-	<script src="static/vendor/three.js/shaders/BlendShader.js"></script>
-	<script src="static/vendor/three.js/shaders/CopyShader.js"></script>
-	<script src="static/vendor/three.js/shaders/ColorifyShader.js"></script>
-	<script src="static/vendor/three.js/shaders/ConvolutionShader.js"></script>
-	<script src="static/vendor/three.js/shaders/FilmShader.js"></script>
-	<script src="static/vendor/three.js/shaders/FXAAShader.js"></script>
-	<script src="static/vendor/three.js/shaders/HorizontalBlurShader.js"></script>
-	<script src="static/vendor/three.js/shaders/SepiaShader.js"></script>
-	<script src="static/vendor/three.js/shaders/VerticalBlurShader.js"></script>
-	<script src="static/vendor/three.js/shaders/VignetteShader.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+    <![endif]-->
+    <style>
+      body {
+        padding-top: 50px; /* Only include this for the fixed top bar */
+      }
+    </style>
+  </head>
+  <body id="top">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+		  
+          <a class="brand" href="#top"><img width="30"  src="static/img/HAL9000.svg" style="margin-top:-5px"></img> Hallify.us</span></a>
 
+          <ul class="nav boxer_nav">
+            <li class="active"><a href="#top"><i class="icon-facetime-video"></i> Stream</a></li>
+            <li><a href="#product2"><i class="icon-download-alt"></i> Create Hall</a></li>
+            <li><a href="#product3"><i class="icon-user"></i> Share!</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <article class="featured_top">
+      <div class="container">
+        <div class="white_gradient">
+          <div class="row">
+            <div class="span12 align_center">
+			  <p>Let your audience express themselves</p>
+              <h1 class="boxer_title"> performances</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
 
-	<script src="static/vendor/three.js/postprocessing/EffectComposer.js"></script>
-	<script src="static/vendor/three.js/postprocessing/BloomPass.js"></script>
-	<script src="static/vendor/three.js/postprocessing/DotScreenPass.js"></script>
-	<script src="static/vendor/three.js/postprocessing/FilmPass.js"></script>
-	<script src="static/vendor/three.js/postprocessing/MaskPass.js"></script>
-	<script src="static/vendor/three.js/postprocessing/RenderPass.js"></script>
-	<script src="static/vendor/three.js/postprocessing/SavePass.js"></script>
-	<script src="static/vendor/three.js/postprocessing/ShaderPass.js"></script>
-	<script src="static/vendor/three.js/postprocessing/TexturePass.js"></script>
-	
-	<script src="static/js/libs/tquery-effectcomposer.js"></script>
-	<script src="static/js/libs/tquery-headtrackr.js"></script>
-	<script src="static/js/libs/tquery-tween.js"></script>
-	<script src='static/js/libs/THREEx.KeyboardState.js'></script>
-	<script src="static/js/libs/CSS3DRenderer.js"></script>
-	<script src="static/js/libs/socket.io.js"></script>
-</head>
-<body>
-	<script src="static/js/Player.js"></script>
-	<script src="static/js/Hall.js"></script>
-</body>
+    <article class="body_article">
+      <div class="container">
+        <div class="row">
+          <div class="span7"><img class="span5" src="static/img/liveStream.png" /></div>
+          <div class="span5">
+            <h2 class="boxer_title">#1 Go live</h2><br>
+            Choose your favourite <strong>live stream</strong> service: <br><br>
+			<ul class="unstyled" style="margin-left:40px">
+				<li> <a href="http://www.ustream.tv/new" target="_blank">Ustream</a></li>
+				<li> <a href="http://www.twitch.tv/" target="_blank">twitch</a></li>
+				<li> <a href="http://www.youtube.com" target="_blank">youtube</a></li>
+				<li> <a href="http://www.youtube.com" target="_blank">livestream</a></li>
+			</ul>
+          </div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="section_divider">
+      <div class="container">
+        <div class="next_section" style="width:200px; float:left; border-right: 1px solid #dbe3e5;"><span><a href="#product2" style="color:#888"></a></span>
+        </div>
+      </div>
+    </article>
+    
+    <span id="product2"></span>
+    <article class="body_article">
+      <div class="container">
+        <div class="row">
+          <div class="span5">
+			  <div class="span5">
+			  <h2 class="boxer_title">#2 Create the hall</h2><br>
+			  
+			  People will be able to <strong>join a hall</strong> and engage with your virtual audience in a more <strong>pro-active</strong> way 
+			  <br><br><br><br>
+			  <input id="liveURLtxt" class="span5" type="text" placeholder="Paste video url" oninput="createHall(this.value);">
+			  </div>
+		  </div>
+		  <div class="span5 offset2"><img src="static/img/hall.png">
+        </div>
+      </div>
+    </article>
+
+    <article class="section_divider">
+      <div class="container">
+        <div class="next_section" style="width:200px; float:left; border-right: 1px solid #dbe3e5;"><span><a href="#product3" style="color:#888"></a></span>
+        </div>
+      </div>
+    </article>
+    
+    <span id="product3"></span>
+    <article class="body_article">
+      <div class="container">
+        <div class="row">
+          <div class="span6">
+			<br><br>
+			<img src="static/img/facebook_circle_color.svg">
+			<img src="static/img/google_circle_color.svg">
+			<img src="static/img/twitter_circle_color.svg">
+			<img src="static/img/github_circle_color.svg">
+			<img src="static/img/tumblr_circle_color.svg">
+		  </div>
+          <div class="span5"><h2 class="boxer_title">#3 Share it!</h2><br>
+             Spread &nbsp; <div class="input-append">
+			  <input class="span3" id="appendedInput" type="text" placeholder="Paste video url first" disabled>
+			  <span class="add-on" title="Copy to clipboard"><i class="icon-file"></i> </span>
+				</div> <br> to let people <strong>join in</strong>!
+			<br><br><br>
+		  </div>
+		  
+        </div>
+      </div>
+    </article>
+
+	<br><br><br>
+    <article class="section_divider"></article>
+
+    <div class="boxer_footer">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <ul>
+              <li><a href="http://callandrespon.se/car/">C.A.R.</a></li>
+            </ul>
+            <div class="boxer_copyright">
+              &copy; 2013 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
