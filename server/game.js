@@ -1,15 +1,19 @@
 /**************************************************
 ** NODE.JS REQUIREMENTS
 **************************************************/
-var util = require("util"),					// Utility resources (logging, object inspection, etc)
-	io = require("socket.io"),
-	express = require("express"),				// Socket.IO
-	Player = require("./Player").Player,	// Player class
+var util = require("util"),					
+	io = require("socket.io"),		
+	express = require("express"),				
+	params = require('express-params'),
+	uuid = require('node-uuid'),
+	Player = require("./Player").Player,	
 	app = express(),
 	active,
 	config = {
 		allowedDomains: "http://ec2-54-229-20-181.eu-west-1.compute.amazonaws.com:9093"
-	};
+	},
+	halls = [];
+
 
 /**************************************************
 ** SERVER CONFIG
@@ -23,24 +27,56 @@ var crossDomain = function(req, res, next) {
     next();
 };
 
+params.extend(app);
+
 app.configure(function() {
+	app.use(express.bodyParser());
 	app.use(crossDomain);
 });
 
 
-app.get('/', function(req, res) {
-    res.send('Hello World');
+app.get('/halls/:id', function(req, res) {
+	var id = req.params.id,
+		hall,
+		message,
+		code;
+
+	if (id) {
+		hall = halls[id];
+
+		if (hall) {
+			message = hall;
+			status = 200;
+		} else {
+			message = {error: "Id not stored"};
+			status = 404;
+		}
+	} else {
+		message = {error: "Invalid id"};
+		status = 404;
+	}
+
+    res.json(message, status);
 });
 
-app.post("/halls", function(req, res) {
-	var url = req.body.url;
+app.post("/api/halls", function(req, res) {
+	var url = req.body.url,
+		hall;
 
-	console.log(url);
-	if (url) {
-		res.json({hall: "http://www.google.es"}, 201);
-	} else {
-		res.json({error: "Invalid url"}, 400);
+    console.log(url);
+	if (url.indexOf("embed") != -1) {
+		hall = halls.findByURL(url);
+		
+		if (!hall) {
+			hall = {id: uuid.v4(), url: url};
+			halls[hall.id] = hall;
+		}
+		console.log(hall);
+		
+		res.json(hall, 201);
 	}
+
+	res.json({error: "Invalid url"}, 400);
 });
 
 app.listen(9091);
@@ -178,3 +214,15 @@ function playerById(id) {
 ** RUN THE GAME
 **************************************************/
 init();
+
+
+/**************************************************
+** UTILS
+**************************************************/
+halls.findByURL = function (url) {
+    var hall = this.filter(function(url) {
+        return item.url == url;
+    })[0];
+
+    return hall;
+}

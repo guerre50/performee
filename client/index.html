@@ -18,7 +18,7 @@
 	<script>
 		function createHall(url) {
 			var request = $.ajax({
-				url: "http://ec2-54-229-20-181.eu-west-1.compute.amazonaws.com:9091/halls",
+				url: "http://ec2-54-229-20-181.eu-west-1.compute.amazonaws.com:9091/api/halls",
 				type: "post",
 				data: {url:url}
 			}).done(function(response, textStatus) {
