@@ -5,7 +5,8 @@ var util = require("util"),					// Utility resources (logging, object inspection
 	io = require("socket.io"),
 	express = require("express"),				// Socket.IO
 	Player = require("./Player").Player,	// Player class
-	app = express.createServer();
+	app = express(),
+	active;
 
 /**************************************************
 ** SERVER CONFIG
@@ -16,6 +17,17 @@ app.configure(function() {
 
 app.get('/', function(req, res) {
     res.send('Hello World');
+});
+
+app.post("/halls", function(req, res) {
+	var url = req.body.url;
+
+	console.log(url);
+	if (url) {
+		res.json({hall: "http://www.google.es"}, 201);
+	} else {
+		res.json({error: "Invalid url"}, 400);
+	}
 });
 
 app.listen(9091);
