@@ -22,7 +22,12 @@
 				type: "post",
 				data: {url:url}
 			}).done(function(response, textStatus) {
-				console.log(response);
+				var id = response.id;
+
+        if (id) {
+           id = window.location.href + "halls/" + id;
+           $("#appendedInput").removeAttr("disabled").val(id);
+        }
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				$("#liveURLtxt").addClass("animated shake");
 				
