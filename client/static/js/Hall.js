@@ -166,6 +166,7 @@ function onRemovePlayer(data) {
 		return;
 	};
 
+	removePlayer.remove();
 	// Remove player from array
 	remotePlayers.splice(remotePlayers.indexOf(removePlayer), 1);
 };
