@@ -27,9 +27,9 @@
         if (id) {
            id = window.location.href + "halls/" + id;
            $("#appendedInput").removeAttr("disabled").val(id);
-           $("#iconOutput").removeClass().addClass("icon-play");
+           $("#iconOutput").removeClass().addClass("icon-play").attr("href", id);
            $("#hallOutputdiv").addClass("animated shake");
-           $("#buttonOutput").removeClass("btn-danger").addClass("btn-success").attr("href", id);
+           $("#buttonOutput").removeClass("btn-danger").addClass("btn-success");
         }
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				$("#liveURLtxt").addClass("animated shake");
