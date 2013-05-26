@@ -25,7 +25,7 @@
 				var id = response.id;
 
         if (id) {
-           id = "http://ec2-54-229-20-181.eu-west-1.compute.amazonaws.com:9091/" + id;
+           id = "http://ec2-54-229-20-181.eu-west-1.compute.amazonaws.com:9091/halls/" + id;
            $("#appendedInput").removeAttr("disabled").val(id);
            $("#iconOutput").removeClass().addClass("icon-play");
            $("#hallOutputdiv").addClass("animated shake");
