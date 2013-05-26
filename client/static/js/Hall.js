@@ -24,13 +24,14 @@ function init() {
 	keyboard = new THREEx.KeyboardState();
 	camera = world.tCamera();
 	factor	= 20;
+	/*
 	$(window).keydown(function(event){
 		console.log(event);
 		if (event.keyCode == 68) {
 			debug = !debug;
 			headTracker.debugView(debug);
 		}
-	});
+	});*/
 
 	world.removeCameraControls();
 	world.tRenderer().setClearColor("black", world.tRenderer().getClearAlpha() );
