@@ -9,7 +9,9 @@ var localPlayer,
 	camera,
 	factor,
 	delta,
-	hall;
+	hall,
+	headTracker,
+	debug = false;
 
 
 /**************************************************
@@ -22,6 +24,13 @@ function init() {
 	keyboard = new THREEx.KeyboardState();
 	camera = world.tCamera();
 	factor	= 20;
+	$(window).keydown(function(event){
+		console.log(event);
+		if (event.keyCode == 68) {
+			debug = !debug;
+			headTracker.debugView(debug);
+		}
+	});
 
 	world.removeCameraControls();
 	world.tRenderer().setClearColor("black", world.tRenderer().getClearAlpha() );
@@ -34,12 +43,12 @@ function init() {
 	//world.addEffectComposer().bloom(1.5).finish();
 
 	// create the headTracker
-    var headTracker = tQuery.createHeadtrackr({
+    headTracker = tQuery.createHeadtrackr({
 		headtrackrOpts	: {
 			calcAngles	: false
 		}
 	}).start();
-    headTracker.debugView(true);
+    headTracker.debugView(debug);
 
 	// Initialise the local player
 	localPlayer = new Player();
