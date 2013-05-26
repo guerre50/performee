@@ -28,6 +28,7 @@
            id = window.location.href + "halls/" + id;
            $("#appendedInput").removeAttr("disabled").val(id);
            $("#iconOutput").removeClass().addClass("icon-play");
+           $("#hallOutputdiv").addClass("animated shake");
            $("#buttonOutput").removeClass("btn-danger").addClass("btn-success").attr("href", id);
         }
 			}).fail(function(jqXHR, textStatus, errorThrown) {
