@@ -6,14 +6,24 @@ var util = require("util"),					// Utility resources (logging, object inspection
 	express = require("express"),				// Socket.IO
 	Player = require("./Player").Player,	// Player class
 	app = express(),
-	active;
+	app.use(crossDomain),
+	active,
+	config = {
+		allowedDomains: "http://ec2-54-229-20-181.eu-west-1.compute.amazonaws.com:9093"
+	};
 
 /**************************************************
 ** SERVER CONFIG
 **************************************************/
-app.configure(function() {
+//CORS middleware
+var crossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', config.allowedDomains);
+    res.header('Access-Control-Allow-Methods', 'GET,POST');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
 
-});
+    next();
+};
+
 
 app.get('/', function(req, res) {
     res.send('Hello World');
