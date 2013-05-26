@@ -28,9 +28,9 @@
            id = "http://ec2-54-229-20-181.eu-west-1.compute.amazonaws.com:9091/halls/" + id;
            $.ajax({ 
               url: "https://www.googleapis.com/urlshortener/v1/url",
-              type: "post",
-              contentType : "application/json",
-              data: { longUrl :id }
+              type: "POST",
+              contentType : "application/json; charset=utf-8",
+              data: JSON.stringify({ "longUrl" :id })
            }).done(function(response, textStatus){
                $("#appendedInput").removeAttr("disabled").val(response.id);
                $("#iconOutput").removeClass().addClass("icon-play");
