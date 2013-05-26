@@ -27,6 +27,8 @@
         if (id) {
            id = window.location.href + "halls/" + id;
            $("#appendedInput").removeAttr("disabled").val(id);
+           $("#iconOutput").removeClass().addClass("icon-play");
+           $("#buttonOutput").removeClass("btn-danger").addClass("btn-success").attr("href", id);
         }
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				$("#liveURLtxt").addClass("animated shake");
@@ -146,10 +148,10 @@
 			<img src="static/img/github_circle_color.svg">
 			<img src="static/img/tumblr_circle_color.svg">
 		  </div>
-          <div class="span5"><h2 class="boxer_title">#3 Share it!</h2><br>
-             Spread &nbsp; <div class="input-append">
+          <div class="span5" ><h2 class="boxer_title">#3 Share it!</h2><br>
+             Spread &nbsp; <div id="hallOutputdiv" class="input-append">
 			  <input class="span3" id="appendedInput" type="text" placeholder="Paste video url first" disabled>
-			  <span class="add-on" title="Copy to clipboard"><i class="icon-file"></i> </span>
+			  <span id="buttonOutput" class="add-on btn btn-danger"><i id="iconOutput" class="icon-stop"></i> </span>
 				</div> <br> to let people <strong>join in</strong>!
 			<br><br><br>
 		  </div>
