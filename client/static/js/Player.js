@@ -19,7 +19,7 @@ var Player = function() {
 	};
 
 	var send = function() {
-		socket.emit("move player", {x: object.positionX(), y: object.positionY()});
+		socket.emit("move player", {x: object.positionX(), y: object.positionY(), hall: hall});
 	};
 
 	var update = function(_delta) {
@@ -46,7 +46,7 @@ var Player = function() {
 	};
 
 	var join = function() {
-		socket.emit("new player", {x: object.positionX(), y: object.positionY()});
+		socket.emit("new player", {x: object.positionX(), y: object.positionY(), hall:hall});
 	};
 
 	var remove = function() {

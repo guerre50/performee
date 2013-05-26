@@ -8,13 +8,16 @@ var localPlayer,
 	keyboard,
 	camera,
 	factor,
-	delta;
+	delta,
+	hall;
 
 
 /**************************************************
 ** GAME INITIALISATION
 **************************************************/
 function init() {
+	hall = document.body.getAttribute("data-hall");
+
 	world = tQuery.createWorld().boilerplate().start();
 	keyboard = new THREEx.KeyboardState();
 	camera = world.tCamera();
@@ -77,8 +80,8 @@ function init() {
 	rendererMain.domElement.style.zIndex	= 1;
 	rendererCSS.domElement.appendChild( rendererMain.domElement );
 
-	var element	= document.createElement('iframe')
-	element.src	= 'http://www.youtube.com/embed/wZZ7oFKsKzY?rel=0'
+	var element	= document.createElement('iframe');
+	element.src	= document.body.getAttribute("data-url");
 	element.style.width = '920px';
 	element.style.height = '720px';
 
@@ -130,12 +133,14 @@ function onSocketDisconnect() {
 function onNewPlayer(data) {
 	console.log("New player connected: "+data.id);
 
-	// Initialise the new player
-	var newPlayer = new Player();
-	newPlayer.id = data.id;
+	if (data.hall == hall) {
+		// Initialise the new player
+		var newPlayer = new Player();
+		newPlayer.id = data.id;
 
-	// Add new player to the remote players array
-	remotePlayers.push(newPlayer);
+		// Add new player to the remote players array
+		remotePlayers.push(newPlayer);
+	}
 };
 
 // Move player

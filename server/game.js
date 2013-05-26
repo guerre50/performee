@@ -45,8 +45,12 @@ app.get('/halls/:id', function(req, res) {
 		hall = halls[id];
 
 		if (hall) {
-			message = hall;
-			status = 200;
+			res.render("hall.ejs", {
+				hall: hall.id,
+				url : hall.url,
+				baseurl : "http://ec2-54-229-20-181.eu-west-1.compute.amazonaws.com:9093"
+			});
+			return;
 		} else {
 			message = {error: "Id not stored"};
 			status = 404;
@@ -159,15 +163,17 @@ function onNewPlayer(data) {
 	// Create a new player
 	var newPlayer = new Player(data.x, data.y);
 	newPlayer.id = this.id;
+	newPlayer.hall = data.hall;
 
 	// Broadcast new player to connected socket clients
-	this.broadcast.emit("new player", {id: newPlayer.id, x: newPlayer.getX(), y: newPlayer.getY()});
+	this.broadcast.emit("new player", {id: newPlayer.id, x: newPlayer.getX(), y: newPlayer.getY(), hall:newPlayer.hall});
 
 	// Send existing players to the new player
 	var i, existingPlayer;
+
 	for (i = 0; i < players.length; i++) {
 		existingPlayer = players[i];
-		this.emit("new player", {id: existingPlayer.id, x: existingPlayer.getX(), y: existingPlayer.getY()});
+		this.emit("new player", {id: existingPlayer.id, x: existingPlayer.getX(), y: existingPlayer.getY(), hall: existingPlayer.hall});
 	};
 		
 	// Add new player to the players array
@@ -191,7 +197,7 @@ function onMovePlayer(data) {
 	movePlayer.setY(data.y);
 
 	// Broadcast updated position to connected socket clients
-	this.broadcast.emit("move player", {id: movePlayer.id, x: movePlayer.getX(), y: movePlayer.getY()});
+	this.broadcast.emit("move player", {id: movePlayer.id, x: movePlayer.getX(), y: movePlayer.getY(), hall:movePlayer.hall});
 };
 
 
