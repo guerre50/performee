@@ -26,11 +26,20 @@
 
         if (id) {
            id = "http://ec2-54-229-20-181.eu-west-1.compute.amazonaws.com:9091/halls/" + id;
-           $("#appendedInput").removeAttr("disabled").val(id);
-           $("#iconOutput").removeClass().addClass("icon-play");
-           $("#hallOutputdiv").addClass("animated shake");
-           $("#buttonOutput").removeClass("btn-danger").addClass("btn-success");
-           $("#outputHREF").attr("href", id);
+           $.ajax({ 
+              url: "https://www.googleapis.com/urlshortener/v1/url",
+              type: "post",
+              contentType : "application/json"
+              data: { longUrl :id }
+           }).done(function(response, textStatus){
+               $("#appendedInput").removeAttr("disabled").val(response.id);
+               $("#iconOutput").removeClass().addClass("icon-play");
+               $("#hallOutputdiv").addClass("animated shake");
+               $("#buttonOutput").removeClass("btn-danger").addClass("btn-success");
+               $("#outputHREF").attr("href", id);
+           }).fail(function(jqXHR, textStatus, errorThrown) {
+               console.log(errorThrown);
+           });
         }
 			}).fail(function(jqXHR, textStatus, errorThrown) {
 				$("#liveURLtxt").addClass("animated shake");
